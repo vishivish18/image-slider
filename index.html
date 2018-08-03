@@ -100,8 +100,8 @@
         imgContainer.css({
           "width": `${newImgContainerWidth}px`,
           "height": `${newImgContainerHeight}px`,
-          "top": `-${(newImgContainerHeight-imgWindowHeight)/2}px`,
-          "left": `-${(newImgContainerWidth-imgWindowWidth)/2}px`,
+          // "top": `-${(newImgContainerHeight-imgWindowHeight)/2}px`,
+          // "left": `-${(newImgContainerWidth-imgWindowWidth)/2}px`,
         })
       }
 
@@ -160,7 +160,7 @@
         if (quadrant ==3){
           console.log("quadrant 3")
           imgContainer.css({
-            "top": `-${0}px`,
+            "bottom": `-${0}px`,
             "left": `+${0}px`,
           })  
         }  
@@ -175,14 +175,10 @@
           console.log("quadrant 1")
           imgContainer.css({
             "top": `+${0}px`,
-            "right": '-200px',
+            "right": `+${0}px`,
           })  
         }       
-        
-        // imgContainer.css({
-        //   "top": `-${y}px`,
-        //   "left": `-${x}px`,
-        // })
+              
       })
 
       $("#zoom-plus").on("click", function() {
