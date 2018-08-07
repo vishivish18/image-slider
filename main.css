@@ -1,0 +1,112 @@
+* {
+      margin: 0;
+      padding: 0;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+
+    #outer-container {
+      background-color: aqua;
+      width: 100vw;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    #image-slider {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      #image-slider {
+        width: 40.55vw;
+      }
+    }
+
+    @media screen and (min-width: 978px) {
+      #image-slider {
+        width: 397px;
+      }
+    }
+
+    #img-window {
+      border: 1px solid black;
+      width: 100%;
+      /* height/width = 1.302267 */
+      /* height set in script */
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    #img-container {
+      display: block;
+      width: inherit;
+      position: absolute;
+      /* left: -198.5px;
+      top: -258.5px; */
+    }
+
+    .image-controls {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 0 0;
+    }
+
+    #buttons-container {
+      margin: 0 10px 0 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #buttons-container .zoom-button {
+      color:black;
+      font-size: 25px;
+      align-self: center;
+    }
+
+    #buttons-container .zoom-button:active {
+      color: blue;
+    }
+
+    #thumbnails-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    #thumbnails-container .thumbnail-scroll-buttons {
+      font-size: 25px;
+      height: 50px;
+      padding: 15px 5px 0 5px;
+      color: grey;
+      display: none;
+    }
+    #thumbnails-container .thumbnail-scroll-buttons:hover {
+      color: black;
+    }
+
+    #thumbnails-container #image-container {
+      flex-grow: 1;
+    }
+
+    #thumbnails-container img {
+      width: 35px;
+      height: 45.579345px;
+      /* height/width = 1.302267 */
+      padding: 1px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      margin-right: 5px;
+    }
+
+    .black-border {
+      border: 1px solid black !important;
+      border-radius: 2px;
+    }
