@@ -78,25 +78,26 @@
       flex-grow: 1;
       display: flex;
       align-items: center;
-      width: 100%;
+      /* width: 100%; */
+      /* overflow: hidden; */
     }
 
     #thumbnails-container .thumbnail-scroll-buttons {
       font-size: 25px;
-      height: 50px;
-      padding: 15px 5px 0 5px;
+      padding: 0 5px 0 5px;
       color: grey;
-      display: none;
+      /* display: none; */
     }
     #thumbnails-container .thumbnail-scroll-buttons:hover {
       color: black;
     }
 
     #thumbnails-container #image-container {
-      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
     }
 
-    #thumbnails-container img {
+    #thumbnails-container #image-container .thumbnail {
       width: 35px;
       height: 45.579345px;
       /* height/width = 1.302267 */

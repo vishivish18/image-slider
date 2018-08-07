@@ -30,11 +30,6 @@ $(document).ready(function() {
   const centerX = imgWindow.height()/2;
   const centerY = imgWindow.height()/2;
 
-  const imgPreview1 = $("#img-preview-1")
-  const imgPreview2 = $("#img-preview-2")
-  const imgPreview3 = $("#img-preview-3")
-  imgPreview1.addClass("black-border")
-
   function setImageWindowHeight() {
     imgWindow.height(imgWindow.width() * imgAspectRatio)
   }
@@ -43,6 +38,12 @@ $(document).ready(function() {
 
   function initializeThumbnails() {
     const thumbnailsImageContainer = $("#thumbnails-container #image-container");
+    
+    let width = $(".image-controls").width() - $("#buttons-container").outerWidth(true);
+    $("#thumbnails-container").css({
+      "width": width+"px"
+    })
+
     for(index in largeImageUrls) {
       thumbnailsImageContainer.append(
         `<img data-image-id="${index}" class="thumbnail" src="${largeImageUrls[index]}">`
@@ -50,33 +51,6 @@ $(document).ready(function() {
     }
   }
   initializeThumbnails();
-
-  imgPreview1.on("click", function() {
-    imgPreview1.addClass("black-border")
-    imgPreview2.removeClass("black-border")
-    imgPreview3.removeClass("black-border")
-    imgContainer.attr("src", "images/large/shirt.jpg")
-    // zoomFactor = 1;
-    // zoom();
-  })
-
-  imgPreview2.on("click", function() {
-    imgPreview2.addClass("black-border")
-    imgPreview1.removeClass("black-border")
-    imgPreview3.removeClass("black-border")
-    imgContainer.attr("src", "images/large/red-shirt.jpg")
-    // zoomFactor = 1;
-    // zoom();
-  })
-
-  imgPreview3.on("click", function() {
-    imgPreview3.addClass("black-border")
-    imgPreview1.removeClass("black-border")
-    imgPreview2.removeClass("black-border")
-    imgContainer.attr("src", "images/large/blue-shirt.jpg")
-    // zoomFactor = 1;
-    // zoom(); 
-  })
 
   function zoom() {
     console.log("called")
