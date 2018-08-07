@@ -1,3 +1,19 @@
+const largeImageUrls = [
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/shirt.jpg",
+]
+
 $(document).ready(function() {
   const zoomJump = 0.5;
   let zoomFactor = 1;
@@ -23,7 +39,17 @@ $(document).ready(function() {
     imgWindow.height(imgWindow.width() * imgAspectRatio)
   }
 
-  $(window).resize(setImageWindowHeight)
+  $(window).resize(setImageWindowHeight);
+
+  function initializeThumbnails() {
+    const thumbnailsImageContainer = $("#thumbnails-container #image-container");
+    for(index in largeImageUrls) {
+      thumbnailsImageContainer.append(
+        `<img data-image-id="${index}" class="thumbnail" src="${largeImageUrls[index]}">`
+      )
+    }
+  }
+  initializeThumbnails();
 
   imgPreview1.on("click", function() {
     imgPreview1.addClass("black-border")
@@ -98,7 +124,7 @@ $(document).ready(function() {
             break;
     }
   }
-  imgWindow.on('click', function(event ){
+  imgWindow.on('click', function(event ) {
     zoomFactor += zoomFactor <= 2 ? zoomJump : 0;        
     const x = event.pageX - imgWindowOffsetX;
     const y = event.pageY - imgWindowOffsetY;
