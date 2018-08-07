@@ -10,25 +10,34 @@
 </head>
 <body>
   <div id="outer-container">
-
+    <div id="image-slider">
       <div id="img-window" draggable="true">
-        <img id="img-container" src="images/large/shirt.jpg">
-        </img>
-      </div>
-
-      <div id="change-image">
-        <div id="buttons-container">
-          <i id="zoom-plus" class="far fa-plus-square"></i>
-          <i id="zoom-minus" class="far fa-minus-square"></i>
-          <i id="zoom-reset" class="far fa-times-circle"></i>
+          <img id="img-container" src="images/large/shirt.jpg">
+          </img>
         </div>
-
-        <div id="img-preview-container">
-          <img id="img-preview-1" src="images/large/shirt.jpg">
-          <img id="img-preview-2" src="images/large/red-shirt.jpg">
-          <img id="img-preview-3" src="images/large/blue-shirt.jpg">
-         </div>
-      </div>
+  
+        <div class="image-controls">
+          <div id="buttons-container">
+            <i id="zoom-plus" class="far fa-plus-square zoom-button"></i>
+            <i id="zoom-minus" class="far fa-minus-square zoom-button"></i>
+            <i id="zoom-reset" class="far fa-times-circle zoom-button"></i>
+          </div>
+  
+          <div id="thumbnails-container">
+            <div id="scroll-thumbs-left" class="thumbnail-scroll-buttons">
+              <i class="fas fa-angle-left"></i>
+            </div>
+            <div id="image-container">
+              <img id="img-preview-1" class="thumbnail" src="images/large/shirt.jpg">
+              <img id="img-preview-2" class="thumbnail" src="images/large/red-shirt.jpg">
+              <img id="img-preview-3" class="thumbnail" src="images/large/blue-shirt.jpg">
+            </div>
+            <div id="scroll-thumbs-right" class="thumbnail-scroll-buttons">
+              <i class="fas fa-angle-right"></i>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 
   <script

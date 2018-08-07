@@ -12,10 +12,26 @@
     }
 
     #outer-container {
-      background-color: aqua;
+      /* background-color: aqua; */
       width: 100vw;
       height: 100vh;
       padding: 20px;
+    }
+
+    #image-slider {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      #image-slider {
+        width: 40.55vw;
+      }
+    }
+
+    @media screen and (min-width: 978px) {
+      #image-slider {
+        width: 397px;
+      }
     }
 
     #img-window {
@@ -25,18 +41,7 @@
       /* height set in script */
       position: relative;
       overflow: hidden;
-    }
-
-    @media screen and (min-width: 768px) {
-      #img-window {
-        width: 40.55vw;
-      }
-    }
-
-    @media screen and (min-width: 978px) {
-      #img-window {
-        width: 397px;
-      }
+      box-sizing: border-box;
     }
 
     #img-container {
@@ -47,39 +52,60 @@
       top: -258.5px; */
     }
 
-    #buttons-container {
-      margin-top: 30px;
+    .image-controls {
       display: flex;
-      width: 50px;
+      align-items: center;
+      margin: 20px 0 0 0;
+    }
+
+    #buttons-container {
+      margin: 0 10px 0 0;
+      display: flex;
       flex-direction: column;
     }
 
-    #buttons-container i {
-      padding-right: 20px;
+    #buttons-container .zoom-button {
       color:black;
-      font-size: 24px;
+      font-size: 25px;
       align-self: center;
     }
 
-    #buttons-container i:active {
+    #buttons-container .zoom-button:active {
       color: blue;
     }
 
-    #img-preview-container {
+    #thumbnails-container {
+      flex-grow: 1;
       display: flex;
+      align-items: center;
+      width: 100%;
     }
 
-    #img-preview-container img {
-      width: 80px;
-      height: 104px;
-      margin: 6px 6px 0 6px;
-      border: 2px solid transparent;
+    #thumbnails-container .thumbnail-scroll-buttons {
+      font-size: 25px;
+      height: 50px;
+      padding: 15px 5px 0 5px;
+      color: grey;
+    }
+    #thumbnails-container .thumbnail-scroll-buttons:hover {
+      color: black;
     }
 
-    #change-image {
-      display: flex;
+    #thumbnails-container #image-container {
+      flex-grow: 1;
+    }
+
+    #thumbnails-container img {
+      width: 35px;
+      height: 45.579345px;
+      /* height/width = 1.302267 */
+      padding: 1px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      margin-right: 5px;
     }
 
     .black-border {
-      border: 2px solid black !important;
+      border: 1px solid black !important;
+      border-radius: 2px;
     }
