@@ -3,6 +3,10 @@ $(document).ready(function() {
   let zoomFactor = 1;
   const imgContainer = $("#img-container");
   const imgWindow = $("#img-window");
+  const imgAspectRatio = 1.302267;
+
+  setImageWindowHeight()
+
   const imgWindowWidth = imgWindow.width();
   const imgWindowHeight = imgWindow.height();
   const imgWindowOffsetX = imgWindow.offset().left;
@@ -14,6 +18,12 @@ $(document).ready(function() {
   const imgPreview2 = $("#img-preview-2")
   const imgPreview3 = $("#img-preview-3")
   imgPreview1.addClass("black-border")
+
+  function setImageWindowHeight() {
+    imgWindow.height(imgWindow.width() * imgAspectRatio)
+  }
+
+  $(window).resize(setImageWindowHeight)
 
   imgPreview1.on("click", function() {
     imgPreview1.addClass("black-border")
