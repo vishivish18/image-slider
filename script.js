@@ -1,17 +1,16 @@
 const largeImageUrls = [
   "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
 ]
 
 $(document).ready(function() {
@@ -19,6 +18,7 @@ $(document).ready(function() {
   let zoomFactor = 1;
   const imgContainer = $("#img-container");
   const imgWindow = $("#img-window");
+  const thumbnailsImageContainer = $("#thumbnails-container #image-container");
   const imgAspectRatio = 1.302267;
 
   setImageWindowHeight()
@@ -30,11 +30,6 @@ $(document).ready(function() {
   const centerX = imgWindow.height()/2;
   const centerY = imgWindow.height()/2;
 
-  const imgPreview1 = $("#img-preview-1")
-  const imgPreview2 = $("#img-preview-2")
-  const imgPreview3 = $("#img-preview-3")
-  imgPreview1.addClass("black-border")
-
   function setImageWindowHeight() {
     imgWindow.height(imgWindow.width() * imgAspectRatio)
   }
@@ -42,41 +37,54 @@ $(document).ready(function() {
   $(window).resize(setImageWindowHeight);
 
   function initializeThumbnails() {
-    const thumbnailsImageContainer = $("#thumbnails-container #image-container");
+
+    // Calculate the width for the thumbnails container
+    let thumbnailsContainerWidth = $(".image-controls").width() - $("#buttons-container").outerWidth(true);
+    $("#thumbnails-container").css({
+      "width": thumbnailsContainerWidth+"px"
+    })
+
     for(index in largeImageUrls) {
       thumbnailsImageContainer.append(
         `<img data-image-id="${index}" class="thumbnail" src="${largeImageUrls[index]}">`
       )
     }
+
+    // Calculate whether we need scroll arrow buttons
+    // TODO: This along with other similar code has to be run every time window resizes to take care of
+    // responsiveness.
+    let allThumbnailsWidth = $("#image-container .thumbnail").outerWidth(true) * largeImageUrls.length
+    let error = 0;
+    if(thumbnailsContainerWidth - allThumbnailsWidth - error > 0) {
+      $("#thumbnails-container .thumbnail-scroll-buttons").hide()
+    } else {
+      $("#thumbnails-container .thumbnail-scroll-buttons").show()
+    }
+
+    thumbnailsImageContainer.on("click", function(event) {
+      // Find which child was clicked and correspondingly set the image in Image Container
+      let childId = $(event.target).data("image-id")
+      setSelectedImage(childId)
+    })
   }
+
   initializeThumbnails();
 
-  imgPreview1.on("click", function() {
-    imgPreview1.addClass("black-border")
-    imgPreview2.removeClass("black-border")
-    imgPreview3.removeClass("black-border")
-    imgContainer.attr("src", "images/large/shirt.jpg")
-    // zoomFactor = 1;
-    // zoom();
-  })
+  function setSelectedImage(index) {
+    // Loads the image in the imageContainer
+    imgContainer.attr("src", largeImageUrls[index])
 
-  imgPreview2.on("click", function() {
-    imgPreview2.addClass("black-border")
-    imgPreview1.removeClass("black-border")
-    imgPreview3.removeClass("black-border")
-    imgContainer.attr("src", "images/large/red-shirt.jpg")
-    // zoomFactor = 1;
-    // zoom();
-  })
+    // Sets the selection in the thumbnails
+    thumbnailsImageContainer.find(".thumbnail").each(function() {
+      let thumbnail = $(this)
+      thumbnail.data("image-id") == index ?
+        thumbnail.addClass("black-border") :
+        thumbnail.removeClass("black-border");
+    })
+  }
 
-  imgPreview3.on("click", function() {
-    imgPreview3.addClass("black-border")
-    imgPreview1.removeClass("black-border")
-    imgPreview2.removeClass("black-border")
-    imgContainer.attr("src", "images/large/blue-shirt.jpg")
-    // zoomFactor = 1;
-    // zoom(); 
-  })
+  // Load the first image in the imageContainer on first page load
+  setSelectedImage(0)
 
   function zoom() {
     console.log("called")
