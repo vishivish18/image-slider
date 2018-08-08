@@ -3,15 +3,14 @@ const largeImageUrls = [
   "http://localhost:3030/images/large/red-shirt.jpg",
   "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
 ]
 
 $(document).ready(function() {
@@ -40,9 +39,9 @@ $(document).ready(function() {
   function initializeThumbnails() {
 
     // Calculate the width for the thumbnails container
-    let width = $(".image-controls").width() - $("#buttons-container").outerWidth(true);
+    let thumbnailsContainerWidth = $(".image-controls").width() - $("#buttons-container").outerWidth(true);
     $("#thumbnails-container").css({
-      "width": width+"px"
+      "width": thumbnailsContainerWidth+"px"
     })
 
     for(index in largeImageUrls) {
@@ -51,8 +50,19 @@ $(document).ready(function() {
       )
     }
 
+    // Calculate whether we need scroll arrow buttons
+    // TODO: This along with other similar code has to be run every time window resizes to take care of
+    // responsiveness.
+    let allThumbnailsWidth = $("#image-container .thumbnail").outerWidth(true) * largeImageUrls.length
+    let error = 0;
+    if(thumbnailsContainerWidth - allThumbnailsWidth - error > 0) {
+      $("#thumbnails-container .thumbnail-scroll-buttons").hide()
+    } else {
+      $("#thumbnails-container .thumbnail-scroll-buttons").show()
+    }
+
     thumbnailsImageContainer.on("click", function(event) {
-      // Find which child was clicked and correspondingly set the image
+      // Find which child was clicked and correspondingly set the image in Image Container
       let childId = $(event.target).data("image-id")
       setSelectedImage(childId)
     })
