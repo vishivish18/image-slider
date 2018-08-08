@@ -1,7 +1,7 @@
 const largeImageUrls = [
   "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
-  "http://localhost:3030/images/large/shirt.jpg",
+  "http://localhost:3030/images/large/red-shirt.jpg",
+  "http://localhost:3030/images/large/blue-shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
   "http://localhost:3030/images/large/shirt.jpg",
@@ -19,6 +19,7 @@ $(document).ready(function() {
   let zoomFactor = 1;
   const imgContainer = $("#img-container");
   const imgWindow = $("#img-window");
+  const thumbnailsImageContainer = $("#thumbnails-container #image-container");
   const imgAspectRatio = 1.302267;
 
   setImageWindowHeight()
@@ -37,8 +38,8 @@ $(document).ready(function() {
   $(window).resize(setImageWindowHeight);
 
   function initializeThumbnails() {
-    const thumbnailsImageContainer = $("#thumbnails-container #image-container");
-    
+
+    // Calculate the width for the thumbnails container
     let width = $(".image-controls").width() - $("#buttons-container").outerWidth(true);
     $("#thumbnails-container").css({
       "width": width+"px"
@@ -49,8 +50,31 @@ $(document).ready(function() {
         `<img data-image-id="${index}" class="thumbnail" src="${largeImageUrls[index]}">`
       )
     }
+
+    thumbnailsImageContainer.on("click", function(event) {
+      // Find which child was clicked and correspondingly set the image
+      let childId = $(event.target).data("image-id")
+      setSelectedImage(childId)
+    })
   }
+
   initializeThumbnails();
+
+  function setSelectedImage(index) {
+    // Loads the image in the imageContainer
+    imgContainer.attr("src", largeImageUrls[index])
+
+    // Sets the selection in the thumbnails
+    thumbnailsImageContainer.find(".thumbnail").each(function() {
+      let thumbnail = $(this)
+      thumbnail.data("image-id") == index ?
+        thumbnail.addClass("black-border") :
+        thumbnail.removeClass("black-border");
+    })
+  }
+
+  // Load the first image in the imageContainer on first page load
+  setSelectedImage(0)
 
   function zoom() {
     console.log("called")
